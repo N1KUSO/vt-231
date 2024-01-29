@@ -1,48 +1,37 @@
 #include <stdio.h>
 
-void fusion(int a[], int b[], int n, int m, int c[]) {
-    int i = 0, j = 0, k = 0;
-
-    while (i < n && j < m) {
-        if (a[i] < b[j]) {
-            i++;
-        } else if (a[i] > b[j]) {
-            j++;
-        } else {
-            c[k++] = a[i++];
-            j++;
+void fusion(int *a, int *b, int n_a, int n_b, int *c, int *n_c) {
+    for(size_t i = 0; i < n_a; i++) {
+        for(size_t j = 0; j < n_b; j++) {
+            if(a[i] == b[j]) {
+                c[*n_c] = a[i];
+                (*n_c)++;
+            }
         }
     }
 }
 
 int main() {
-    int n, m;
+    int n_a, n_b;
+    scanf("%d", &n_a);
 
-    printf("Size A: ");
-    scanf("%d", &n);
-
-    int a[n];
-    printf("Data A:");
-    for (int i = 0; i < n; i++) {
+    int a[n_a];
+    for (int i = 0; i < n_a; i++) {
         scanf("%d", &a[i]);
     }
 
-    printf("Size B: ");
-    scanf("%d", &m);
-
-    int b[m];
-    printf("Data B:");
-    for (int i = 0; i < m; i++) {
+    scanf("%d", &n_b);
+    int b[n_b];
+    for (int i = 0; i < n_b; i++) {
         scanf("%d", &b[i]);
     }
 
-    int i, c[i];
+    int n_c = 0;
+    int c[n_c];
+    fusion(a, b, n_a, n_b, c, &n_c);
 
-    fusion(a, b, n, m, c);
-
-    printf("Array c:");
-    for (i = 0; i < n; i++) {
-        printf(" %d", c[i]);
+    for (size_t i = 0; i < n_c; i++) {
+        printf("%d ", c[i]);
     }
 
     return 0;
