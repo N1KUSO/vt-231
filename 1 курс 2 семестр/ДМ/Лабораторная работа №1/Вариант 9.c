@@ -1,5 +1,16 @@
 #include <stdio.h>
 
+void inputArray(int *a, const size_t n) {
+    for (size_t i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+}
+
+void OutputArray(int *a, const int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
 void fusion(int *a, int *b, int n_a, int n_b, int *c, int *n_c) {
     for(size_t i = 0; i < n_a; i++) {
         for(size_t j = 0; j < n_b; j++) {
@@ -10,29 +21,28 @@ void fusion(int *a, int *b, int n_a, int n_b, int *c, int *n_c) {
         }
     }
 }
-
 int main() {
-    int n_a, n_b;
-    scanf("%d", &n_a);
+    int n, m;
 
-    int a[n_a];
-    for (int i = 0; i < n_a; i++) {
-        scanf("%d", &a[i]);
-    }
+    printf("size A: ");
+    scanf("%d", &n);
 
-    scanf("%d", &n_b);
-    int b[n_b];
-    for (int i = 0; i < n_b; i++) {
-        scanf("%d", &b[i]);
-    }
+    printf("array A: ");
+    int a[n];
+    inputArray(a, n);
 
-    int n_c = 0;
-    int c[n_c];
-    fusion(a, b, n_a, n_b, c, &n_c);
+    printf("size B: ");
+    scanf("%d", &m);
 
-    for (size_t i = 0; i < n_c; i++) {
-        printf("%d ", c[i]);
-    }
+    printf("array B: ");
+    int b[m];
+    inputArray(b, m);
+
+    int k = 0;
+    int c[k];
+    fusion(a, b, n, m, c, &k);
+
+    OutputArray(c, k);
 
     return 0;
 }
