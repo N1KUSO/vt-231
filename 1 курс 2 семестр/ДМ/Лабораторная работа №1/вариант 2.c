@@ -11,8 +11,7 @@ void OutputArray(int *a, const int n) { //Вывод массива a разме
     printf("\n");
 }
 
-void getElementsfromBothArrays (int const *a, int const *b, int min_n,
-                                int max_n, int *c, int *size_c) {
+void getElementsfromBothArrays (int const *a, int const *b, int min_n, int max_n, int *c, int *size_c) {
     for (size_t i = 0; i < min_n; i++) {
         for (size_t j = 0; j < max_n; j++) {
             if (a[i] == b[j]) {
