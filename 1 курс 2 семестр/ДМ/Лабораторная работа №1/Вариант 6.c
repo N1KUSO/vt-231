@@ -6,15 +6,19 @@ void inputArray(int *a, const size_t n) {
 }
 
 int isEqualArray(int *a, int *b, int n_a, int n_b) {
-    for (int i = 0; i < n_a; i++) {
-        int is_equal = 0;
-        for(size_t j = 0; j < n_b; j++) {
-            if (a[i] == b[j]) {
-                is_equal = 1;
+    if(n_a != n_b) {
+        return 0;
+    } else {
+        for (int i = 0; i < n_a; i++) {
+            int is_equal = 0;
+            for(size_t j = 0; j < n_b; j++) {
+                if (a[i] == b[j]) {
+                    is_equal = 1;
+                }
             }
-        }
-        if(is_equal == 0) {
-            return 0;
+            if(is_equal == 0) {
+                return 0;
+            }
         }
     }
     return 1;
