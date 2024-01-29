@@ -5,9 +5,15 @@ void inputArray(int *a, const size_t n) {
         scanf("%d", &a[i]);
 }
 
-int areArraysEqual(int a[], int b[], int size) {
-    for (int i = 0; i < size; i++) {
-        if (a[i] != b[i]) {
+int isEqualArray(int *a, int *b, int n_a, int n_b) {
+    for (int i = 0; i < n_a; i++) {
+        int is_equal = 0;
+        for(size_t j = 0; j < n_b; j++) {
+            if (a[i] == b[j]) {
+                is_equal = 1;
+            }
+        }
+        if(is_equal == 0) {
             return 0;
         }
     }
@@ -15,23 +21,17 @@ int areArraysEqual(int a[], int b[], int size) {
 }
 
 int main() {
-    int size;
-    printf("Arrays Size: ");
-    scanf("%d", &size);
+    int n_a;
+    scanf("%d", &n_a);
+    int a[n_a];
+    inputArray(a, n_a);
 
-    int A[size], B[size];
+    int n_b;
+    scanf("%d", &n_b);
+    int b[n_b];
+    inputArray(b, n_b);
 
-    printf("Array A:");
-    inputArray(A, size);
-
-    printf("Array B:");
-    inputArray(B, size);
-
-    if (areArraysEqual(A, B, size)) {
-        printf("Yes");
-    } else {
-        printf("No");
-    }
+    printf("%d", isEqualArray(a, b, n_a, n_b));
 
     return 0;
 }
