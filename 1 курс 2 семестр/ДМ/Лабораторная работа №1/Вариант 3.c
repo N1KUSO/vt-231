@@ -1,52 +1,51 @@
 #include <stdio.h>
 
-void fusion(int a[], int b[], int* c[], int arr1len, int arr2len, int *arr3len){
-
-    int counter = 0;
-
-    for(int i = 0; i < arr1len; i++){
-        for(int q = 0; q < arr2len; q++){
-            if (a[i] != b[q]){
-                counter++;
-            }
-        }
-
-        if (counter == arr2len){
-            counter = 0;
-            c[*arr3len - 1] = a[i];
-            *arr3len++;
-        }
-    }
-}
-
-void inputArray(int *a, const int n) {
+void inputArray(int *a, const size_t n) {
     for (size_t i = 0; i < n; i++)
         scanf("%d", &a[i]);
 }
 
 void outputArray(int *a, const int n) {
-    for (size_t i = 0; i < n; i++)
-        printf("%d", a[i]);
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf("\n");
 }
 
-int main(){
+void getElementsFromArrays (int const *a, int const *b, int a_n, int b_n, int *c, int *size_c) {
+    for (size_t i = 0; i < a_n; i++) {
+        int is_contain = 0;
+        for (size_t j = 0; j < b_n; j++) {
+            if (a[i] == b[j]) {
+                is_contain = 1;
+            }
+        }
+        if(is_contain == 0) {
+            c[*size_c] = a[i];
+            (*size_c)++;
+        }
+    }
+}
 
-    int arr1len;
-    int arr2len;
-    int arr3len = 1;
+int main()
+{
+    int size_a;
+    scanf("%d", &size_a);
 
-    scanf("%d %d", &arr1len, &arr2len);
+    int a[size_a];
+    inputArray(a, size_a);
 
-    int A[arr1len];
-    int B[arr2len];
-    int C[arr3len];
+    int size_b;
+    scanf("%d", &size_b);
 
-    inputArray(A, arr1len);
-    inputArray(B, arr2len);
+    int b[size_b];
+    inputArray(b, size_b);
 
-    fusion(A,B,&C,arr1len,arr2len,&arr3len);
+    int size_c = 0;
+    int c[size_c];
 
-    outputArray(C, arr3len);
+    getElementsFromArrays(a, b, size_a, size_b, c, &size_c);
+
+    outputArray(c, size_c);
 
     return 0;
 }
