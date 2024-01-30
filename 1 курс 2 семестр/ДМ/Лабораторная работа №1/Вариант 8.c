@@ -5,65 +5,47 @@ void inputArray(int *a, const size_t n) {
         scanf("%d", &a[i]);
 }
 
-void OutputArray(int *a, const int n) {
+void outputArray(int *a, const int n) {
     for (int i = 0; i < n; i++)
         printf("%d ", a[i]);
     printf("\n");
 }
 
-void func(int *A, int *B, int n, int m, int *C) {
+void containsElements(const int *a, const int *b, int *c, const size_t size_a, const size_t size_b){
+    size_t count_a = 0;
+    size_t count_b = 0;
 
-    int i = 0, j = 0, k = 0;
-
-    while (i < n && j < m) {
-        if (A[i] < B[j]) {
-            C[k] = A[i];
-            i++;
-        } else {
-            C[k] = B[j];
-            j++;
+    for(size_t i = 0; i < size_b + size_a; i++){
+        if(a[count_a] >= b[count_b]) {
+            c[i] = b[count_b];
+            count_b++;
         }
-        k++;
-    }
-
-    while (i < n) {
-        C[k] = A[i];
-        i++;
-        k++;
-    }
-
-    while (j < m) {
-        C[k] = B[j];
-        j++;
-        k++;
+        else {
+            c[i] = a[count_a];
+            count_a++;
+        }
     }
 }
 
 int main() {
-    int n, m;
+    int size_a, size_b;
+    scanf("%d", &size_a);
 
-    printf("size A: ");
-    scanf("%d", &n);
+    int a[size_a];
+    inputArray(a, size_a);
 
-    int A[n];
+    scanf("%d", &size_b);
 
-    printf("array A: ");
-    inputArray(A, n);
+    int b[size_b];
 
-    printf("size B: ");
-    scanf("%d", &m);
+    inputArray(b, size_b);
 
-    int B[m];
+    int size_c = size_a + size_b;
+    int c[size_c];
 
-    printf("array B: ");
-    inputArray(B, m);
+    containsElements(a, b, c, size_a, size_b);
 
-    int C[n + m];
-
-    func(A, B, n, m, C);
-
-    printf("Array C: ");
-    OutputArray(C, n + m);
+    outputArray(c, size_c);
 
     return 0;
 }

@@ -23,18 +23,12 @@ void fusion(int *a, int *b, int n_a, int n_b, int *c, int *n_c) {
 }
 int main() {
     int n, m;
-
-    printf("size A: ");
     scanf("%d", &n);
 
-    printf("array A: ");
     int a[n];
     inputArray(a, n);
 
-    printf("size B: ");
     scanf("%d", &m);
-
-    printf("array B: ");
     int b[m];
     inputArray(b, m);
 
