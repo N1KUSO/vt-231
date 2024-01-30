@@ -1,73 +1,59 @@
 #include <stdio.h>
 
-void mergearrays(int a[], int b[], int sizea, int sizeb, int c[], int *sizec) {
-    int i = 0, j = 0, k = 0;
+void inputArray(int *a, const size_t n) {
+    for (size_t i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+}
 
-    while (i < sizea && j < sizeb) {
+void outputArray(int *a, const int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+void mergeArrays(int *a, int size_a, int *b, int size_b, int *c, int *size_c) {
+    int i = 0, j = 0;
+
+    while (i < size_a && j < size_b) {
         if (a[i] < b[j]) {
-            c[k++] = a[i++];
-        }
-        else if (b[j] < a[i]) {
-            c[k++] = b[j++];
-        }
-        else {
-            c[k++] = a[i++];
+            c[(*size_c)++] = a[i++];
+        } else if (a[i] > b[j]) {
+            c[(*size_c)++] = b[j++];
+        } else {
+            i++;
             j++;
         }
     }
 
-    while (i < sizea)
-        c[k++] = a[i++];
-
-    while (j < sizeb)
-        c[k++] = b[j++];
-
-    *sizec = k;
-
-    
-    for (int m = 0; m < *sizec - 1; m++) {
-        for (int n = 0; n < *sizec - m - 1; n++) {
-            if (c[n] > c[n + 1]) {
-                int temp = c[n];
-                c[n] = c[n + 1];
-                c[n + 1] = temp;
-            }
-        }
+    while (i < size_a) {
+        c[(*size_c)++] = a[i++];
     }
 
-    
-    for (int m = 0; m < *sizec - 1; m++) {
-        while (c[m] == c[m + 1]) {
-            for (int n = m + 1; n < *sizec - 1; n++)
-                c[n] = c[n + 1];
-            (*sizec)--;
-        }
+    while (j < size_b) {
+        c[(*size_c)++] = b[j++];
     }
 }
 
-int main() {
-    int sizea, sizeb, sizec, a[sizea], b[sizeb], c[sizec];
-  
-    printf("размер массива a: ");
-    scanf("%d", &sizea);
-    printf("элементы массива a: ");
-    for (int i = 0; i < sizea; i++) {
-        scanf("%d", &a[i]);
-    }
-  
-    printf("размер массива b: ");
-    scanf("%d", &sizeb);
-    printf("элементы массива b: ");
-    for (int i = 0; i < sizeb; i++) {
-        scanf("%d", &b[i]);
-    }
-  
-    mergearrays(a, b, sizea, sizeb, c, &sizec);
+int main()
+{
+    int size_a;
+    scanf("%d", &size_a);
 
-    printf("массив с: ");
-    for (int i = 0; i < sizec; i++) {
-        printf("%d ", c[i]);
-    }
-  
+    int a[size_a];
+    inputArray(a, size_a);
+
+    int size_b;
+    scanf("%d", &size_b);
+
+    int b[size_b];
+    inputArray(b, size_b);
+
+    int size_c = 0;
+    int c[size_c];
+
+    mergeArrays(a, size_a, b, size_b, c, &size_c);
+
+    outputArray(c, size_c);
+
     return 0;
 }
